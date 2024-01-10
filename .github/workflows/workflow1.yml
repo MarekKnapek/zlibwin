@@ -1,0 +1,26 @@
+"on": "push"
+"jobs":
+  "build_win":
+    "strategy":
+      "matrix":
+        "plat": ["x86", "x64"]
+    "runs-on": "windows-latest"
+    "steps":
+      - "uses": "actions/checkout@main"
+      - "run": "cmd.exe /c .github\\workflows\\build_win.bat ${{matrix.plat}}"
+      - "uses": "actions/upload-artifact@main"
+        "with":
+          "name": "zlib1-${{matrix.plat}}.dll"
+          "path": "zlib1-${{matrix.plat}}.dll"
+      - "uses": "actions/upload-artifact@main"
+        "with":
+          "name": "zlib1-${{matrix.plat}}.exp"
+          "path": "zlib1-${{matrix.plat}}.exp"
+      - "uses": "actions/upload-artifact@main"
+        "with":
+          "name": "zlib1-${{matrix.plat}}.lib"
+          "path": "zlib1-${{matrix.plat}}.lib"
+      - "uses": "actions/upload-artifact@main"
+        "with":
+          "name": "zlib1-${{matrix.plat}}.pdb"
+          "path": "zlib1-${{matrix.plat}}.pdb"
